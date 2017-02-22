@@ -1,0 +1,51 @@
+create postgresdb (pgadmin)
+
+different application.properties profiles
+application-{profile}.properties
+-Dspring.profiles.active={profile} or add profile intellij runner
+
+seperate entities and repositories in own package
+
+bootstrap them with:
+@SpringBootApplication //also include all files and packages under this directory
+@EntityScan(basePackages = {
+		"be.rmc.entities"
+})
+@EnableJpaRepositories(basePackages = {
+		"be.rmc.repositories"
+})
+
+add jersey and swagger + swagger ui
+
+need to add applicationpath("/v1") for the UI to work//http://stackoverflow.com/questions/35170462/spring-boot-not-serving-static-content-when-jersey-rest-is-included
+and beanConfig.setBasePath("/v1");
+
+http://localhost:8080/swagger/index.html //to access swagger
+
+http://mrbool.com/rest-server-with-spring-data-spring-boot-and-postgresql/34023 good spring example
+https://dzone.com/articles/using-jax-rs-with-spring-boot-instead-of-mvc spring boot with jax-rs + swagger
+
+Remaking the timecard project:
+
+DB: postgresql
+FE: Angular + bootstrap ?
+BE: spring boot or spark (springfox)
+jax-RS
+swagger
+log4j
+
+http://heidloff.net/article/usage-of-swagger-2-0-in-spring-boot-applications-to-document-apis/
+http://www.baeldung.com/swagger-2-documentation-for-spring-rest-api
+https://tech.homeaway.com/development/2016/06/02/generating-swagger-spec.html
+
+TomCat
+
+https://apitransformer.com/
+
+check this out logging.level.org.hibernate.SQL=DEBUG
+logging.level.org.hibernate.type=TRACE
+
+spring multiple profiles options: http://stackoverflow.com/questions/22757318/different-property-variable-for-local-and-prod-environment-spring
+DevTools in Spring Boot 1.3 (turned off automatically for production)
+
+http://docs.spring.io/spring-boot/docs/current/reference/html/howto-actuator.html#howto-use-actuator-with-jersey jersey with spring endpoints in swagger
