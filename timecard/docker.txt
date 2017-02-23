@@ -1,0 +1,80 @@
+Docker Machine Error Unable to Query Docker Version
+docker-machine regenerate-certs <name>
+
+docker postgres:
+
+https://hub.docker.com/_/postgres/
+
+docker pull postgres:latest
+docker run -p 5432:5432 postgres
+docker ps -a
+connect to pgadmin with ip,port
+
+pwd:postgres
+docker run -p 5432:5432 --name postgresdb -e POSTGRES_PASSWORD=postgres -d postgres
+docker run --name timecardapp -p 8080:8080 -d timecard
+
+spring profile options
+docker run -e "SPRING_PROFILES_ACTIVE=prod"
+or
+specify spring options in entry point
+
+Spotify maven docker plugin ex:
+			<plugin>
+				<groupId>com.spotify</groupId>
+				<artifactId>docker-maven-plugin</artifactId>
+
+				<configuration>
+					<imageName>timecard</imageName>
+					<dockerDirectory>.</dockerDirectory>
+					<!-- copy the service's jar file from target into the root directory of the image -->
+					<resources>
+						<resource>
+							<targetPath>/</targetPath>
+							<directory>${project.build.directory}</directory>
+							<include>${project.build.finalName}.jar</include>
+						</resource>
+					</resources>
+				</configuration>
+			</plugin>
+
+
+Dockerfile ex:
+
+FROM centos
+
+ENV JAVA_VERSION 8u31
+ENV BUILD_VERSION b13
+
+# Upgrading system
+RUN yum -y upgrade
+RUN yum -y install wget
+
+# Downloading & Config Java 8
+RUN wget --no-cookies --no-check-certificate --header "Cookie: oraclelicense=accept-securebackup-cookie" "http://download.oracle.com/otn-pub/java/jdk/$JAVA_VERSION-$BUILD_VERSION/jdk-$JAVA_VERSION-linux-x64.rpm" -O /tmp/jdk-8-linux-x64.rpm
+RUN yum -y install /tmp/jdk-8-linux-x64.rpm
+RUN alternatives --install /usr/bin/java jar /usr/java/latest/bin/java 200000
+RUN alternatives --install /usr/bin/javaws javaws /usr/java/latest/bin/javaws 200000
+RUN alternatives --install /usr/bin/javac javac /usr/java/latest/bin/javac 200000
+
+VOLUME /tmp
+RUN sh -c 'touch /timecard.jar'
+ADD timecard-0.0.1-SNAPSHOT.jar timecard.jar
+RUN sh -c 'touch /timecard.jar'
+ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-Dspring.profiles.active=pgdocker","-jar","/timecard.jar"]
+
+Container ip:
+docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' container_name_or_id
+
+Connect to container shell:
+docker exec -it <containerIdOrName> bash
+
+docker hub
+tag your image
+docker tag stevencleys/<reponame>
+docker login
+docker push stevencleys/<reponame>
+
+run docker with -d to run in background
+
+Note: Containers on the default bridge network must be linked to communicate by name.
