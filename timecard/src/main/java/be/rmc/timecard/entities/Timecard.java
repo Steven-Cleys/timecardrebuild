@@ -1,9 +1,11 @@
 package be.rmc.timecard.entities;
 
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.UUID;
 
 
@@ -14,28 +16,48 @@ public class Timecard {
     @GenericGenerator(name = "uuid2", strategy = "uuid2")
     @Column(name = "id", unique = true, nullable = false, updatable = false)
     private UUID id;
-    private String userName;
 
-    Timecard() {  //yes its required
+    private LocalDate entrydate;
+
+    private String status;
+
+    @ManyToOne()
+    @JoinColumn(name = "employee_id")
+    private Employee employee;
+
+    public Timecard() {  //yes its required
     }
 
-    public Timecard(String userName) {
-        this.userName = userName;
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getStatus() {
+        return status;
+    }
+
+    public Employee getEmployee() {
+        return employee;
     }
 
     public UUID getId() {
         return id;
     }
 
+    public LocalDate getEntrydate() {
+        return entrydate;
+    }
+
+    public void setEntrydate(LocalDate entrydate) {
+        entrydate = entrydate;
+    }
+
     @Override
     public String toString() {
         return "Timecard{" +
                 "id=" + id +
-                ", userName='" + userName + '\'' +
+                ", userId='" + employee.toString() + '\'' +
                 '}';
     }
 }

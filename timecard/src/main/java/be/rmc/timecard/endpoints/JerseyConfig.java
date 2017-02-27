@@ -52,5 +52,6 @@ public class JerseyConfig extends ResourceConfig {
 
         register(HelloWorldEndpoint.class);
         register(EmployeeEndpoint.class);
+        register(TimecardEndpoint.class);
     }
 }

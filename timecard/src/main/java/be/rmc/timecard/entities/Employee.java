@@ -4,7 +4,7 @@ import javax.persistence.*;
 import javax.xml.stream.StreamFilter;
 import java.time.LocalDateTime;
 import java.util.Date;
-
+import java.util.List;
 
 
 @Entity
@@ -20,7 +20,6 @@ public class Employee {
     private String nickName;
     @Column(name = "createdAt", updatable = false)
     private Date createdAt;
-
 
     public Long getId() {
         return id;

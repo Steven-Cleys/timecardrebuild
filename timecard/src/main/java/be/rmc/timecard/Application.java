@@ -43,11 +43,11 @@ public class Application extends SpringBootServletInitializer implements WebAppl
 	@Bean
 	CommandLineRunner runner(TimecardRepository tcr, EmployeeRespository er) { //some testing code
 		return args -> {
-			Arrays.asList("test,test3,test15".split(","))
+/*			Arrays.asList("test,test3,test15".split(","))
 					.forEach((n -> tcr.save(new Timecard(n))));
 
 			tcr.findAll().forEach(r -> System.out.println("r = " + r));
-			tcr.findByUserName("test15").forEach(r -> System.out.println("r = " + r));
+			tcr.findByUserName("test15").forEach(r -> System.out.println("r = " + r));*/
 			er.save(new Employee("SCleys","steven","cleys","stevencleys@gmail.com"));
 			Employee emp = er.findOne(1L);
 			System.out.println("emp.toString() = " + emp.toString());
@@ -56,6 +56,9 @@ public class Application extends SpringBootServletInitializer implements WebAppl
 			System.out.println("emp.toString() = " + emp.toString());
 			er.save(new Employee("WDEVOOGHT","Wim","Devooght","wd@gmail.com"));
 			er.save(new Employee("dsf","sfsfsdfsd","jhjh","sdflkj@gmail.com"));
+			Timecard tc = new Timecard();
+			tc.setEmployee(er.findByUserName("SCleys").stream().findFirst().get());
+			tcr.save(tc);
 		};
 	}
 

@@ -4,11 +4,9 @@ import be.rmc.timecard.entities.Timecard;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Collection;
+import java.util.UUID;
 
 
-public interface TimecardRepository extends JpaRepository<Timecard,Long> {
+public interface TimecardRepository extends JpaRepository<Timecard,UUID> {
 
-    //select * from tc where name = :rn
-    //@Query("...")
-    Collection<Timecard> findByUserName (String rn);
 }
