@@ -1,0 +1,20 @@
+docker postgres:
+
+https://hub.docker.com/_/postgres/
+
+To install:
+
+1) docker pull postgres:latest
+
+Run:
+
+2) docker run -p 5432:5432 --name postgresdb -e POSTGRES_PASSWORD=postgres -d postgres
+Verify with "docker ps" command if postgres container is running
+
+To access database:
+
+3) connect to instance with docker exec -it postgresdb bash
+use psql to access database
+
+or download and install  pgadmin 4 and connect to container.
+You can find ip and port with docker -ps
