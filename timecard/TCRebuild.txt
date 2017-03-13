@@ -49,3 +49,10 @@ spring multiple profiles options: http://stackoverflow.com/questions/22757318/di
 DevTools in Spring Boot 1.3 (turned off automatically for production)
 
 http://docs.spring.io/spring-boot/docs/current/reference/html/howto-actuator.html#howto-use-actuator-with-jersey jersey with spring endpoints in swagger
+
+postgresbackups:
+a) pg_dump dbname > outfile
+b) tar -cf backup.tar /usr/local/pgsql/data (does not work when db is running)
+c) WAL
+
+barman: https://www.digitalocean.com/community/tutorials/how-to-back-up-restore-and-migrate-postgresql-databases-with-barman-on-centos-7

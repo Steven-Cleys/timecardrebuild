@@ -78,3 +78,29 @@ docker push stevencleys/<reponame>
 run docker with -d to run in background
 
 Note: Containers on the default bridge network must be linked to communicate by name.
+Docker does not support automatic service discovery on the default bridge network. If you want to communicate with container names in this default bridge network, you must connect the containers via the legacy docker run --link option.
+
+So, here a few steps on how to run CentOS with systemd inside a Docker container:
+
+Pull centos image
+Set up a docker file like the one below:
+
+FROM centos
+MAINTAINER “Yourname" <youremail@address.com>
+ENV container docker
+RUN yum -y update; yum clean all
+RUN yum -y install systemd; yum clean all; \
+(cd /lib/systemd/system/sysinit.target.wants/; for i in *; do [ $i == systemd-tmpfiles-setup.service ] || rm -f $i; done); \
+rm -f /lib/systemd/system/multi-user.target.wants/*;\
+rm -f /etc/systemd/system/*.wants/*;\
+rm -f /lib/systemd/system/local-fs.target.wants/*; \
+rm -f /lib/systemd/system/sockets.target.wants/*udev*; \
+rm -f /lib/systemd/system/sockets.target.wants/*initctl*; \
+rm -f /lib/systemd/system/basic.target.wants/*;\
+rm -f /lib/systemd/system/anaconda.target.wants/*;
+VOLUME [ “/sys/fs/cgroup” ]
+CMD [“/usr/sbin/init”]
+
+Build it - docker build --rm -t centos7-systemd - < mydockerfile
+Run a container with docker run --privileged  -ti -e container=docker  -v /sys/fs/cgroup:/sys/fs/cgroup  centos7-systemd /usr/sbin/init
+You should have systemd in your container
