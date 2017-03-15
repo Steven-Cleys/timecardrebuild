@@ -56,3 +56,4 @@ b) tar -cf backup.tar /usr/local/pgsql/data (does not work when db is running)
 c) WAL
 
 barman: https://www.digitalocean.com/community/tutorials/how-to-back-up-restore-and-migrate-postgresql-databases-with-barman-on-centos-7
+http://www.devsniper.com/base-entity-class-in-jpa/
