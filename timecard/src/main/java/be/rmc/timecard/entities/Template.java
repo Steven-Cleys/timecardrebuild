@@ -1,10 +1,8 @@
 package be.rmc.timecard.entities;
 
-
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 import java.util.UUID;
@@ -14,20 +12,28 @@ import java.util.UUID;
  */
 
 @Entity
-public class Module implements Serializable {
+public class Template {
 
     @Id
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name = "uuid2", strategy = "uuid2")
     @Column(unique = true, nullable = false, updatable = false)
-    private UUID modId;
+    private UUID templateId;
 
     @Column(unique=true,nullable = false)
     private String name;
 
-    private String release;
+    private UUID refId;
 
     private boolean active;
+
+    private String release;
+
+    private String webserviceType;
+
+    private String hostURL;
+
+    private String schema;
 
     @Column(name = "createdAt", updatable = false)
     private Date createdAt;
@@ -36,13 +42,8 @@ public class Module implements Serializable {
     private Date expireDate;
 
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "module_environment", joinColumns = @JoinColumn(name = "mod_id"), inverseJoinColumns = @JoinColumn(name = "env_id"))
-    private Set<Environment> environments;
+    @JoinTable(name = "template_module", joinColumns = @JoinColumn(name = "template_id"), inverseJoinColumns = @JoinColumn(name = "mod_id"))
+    private Set<Module> modules;
 
-    @ManyToMany(mappedBy = "modules")
-    private Set <Template> templates;
-
-
-    private Module() {}
-
+    private Template() {}
 }
