@@ -17,18 +17,28 @@ public class Environment implements Serializable {
     @GenericGenerator(name = "uuid2", strategy = "uuid2")
     @Column(unique = true, nullable = false, updatable = false)
     private UUID envId;
+
     @Column(unique=true,nullable = false)
     private String name;
+
     @Column(nullable = false)
     private String hostName;
+
     @Column(nullable = false)
     private String release;
+
     private String userName;
+
     private String password;
+
     @Column(name = "createdAt", updatable = false)
     private Date createdAt;
+
     @ManyToMany(mappedBy = "environments")
-   private Set <User> users;
+    private Set <User> users;
+
+    @ManyToMany(mappedBy = "environments")
+    private Set <Module> modules;
 
     private Environment() {}
 

@@ -21,20 +21,32 @@ public class User implements Serializable{
     @GenericGenerator(name = "uuid2", strategy = "uuid2")
     @Column(unique = true, nullable = false, updatable = false)
     private UUID userId;
+
     @Column(unique=true,nullable = false)
     private String userName;
+
     private String firstName;
+
     private String lastName;
+
     private String userType;
+
     private String email;
+
     private String password;
+
     private String description;
+
     private String company;
+
     private boolean active;
+
     @Column(name = "createdAt", updatable = false)
     private Date createdAt;
+
     @Column(name = "expireDate")
     private Date expireDate;
+
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "user_environment", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "env_id"))
     private Set<Environment> environments;
