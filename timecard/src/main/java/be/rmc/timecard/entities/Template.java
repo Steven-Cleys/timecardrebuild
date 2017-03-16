@@ -3,6 +3,7 @@ package be.rmc.timecard.entities;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 import java.util.UUID;
@@ -12,7 +13,7 @@ import java.util.UUID;
  */
 
 @Entity
-public class Template {
+public class Template implements Serializable {
 
     @Id
     @GeneratedValue(generator = "uuid2")

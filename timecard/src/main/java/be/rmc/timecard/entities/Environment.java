@@ -34,10 +34,10 @@ public class Environment implements Serializable {
     @Column(name = "createdAt", updatable = false)
     private Date createdAt;
 
-    @ManyToMany(mappedBy = "environments")
+    @ManyToMany(mappedBy = "environments",cascade = CascadeType.ALL)
     private Set <User> users;
 
-    @ManyToMany(mappedBy = "environments")
+    @ManyToMany(mappedBy = "environments", cascade = CascadeType.ALL)
     private Set <Module> modules;
 
     private Environment() {}

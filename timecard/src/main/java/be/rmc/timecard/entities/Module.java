@@ -32,14 +32,11 @@ public class Module implements Serializable {
     @Column(name = "createdAt", updatable = false)
     private Date createdAt;
 
-    @Column(name = "expireDate")
-    private Date expireDate;
-
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "module_environment", joinColumns = @JoinColumn(name = "mod_id"), inverseJoinColumns = @JoinColumn(name = "env_id"))
     private Set<Environment> environments;
 
-    @ManyToMany(mappedBy = "modules")
+    @ManyToMany(mappedBy = "modules", cascade = CascadeType.ALL)
     private Set <Template> templates;
 
 
