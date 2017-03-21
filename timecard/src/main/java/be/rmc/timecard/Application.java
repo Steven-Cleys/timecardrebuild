@@ -31,7 +31,8 @@ import java.util.Arrays;
 @EnableJpaRepositories(basePackages = { //repository
 		"be.rmc.timecard.repositories"
 })
-@ComponentScan(basePackages = "be.rmc.timecard.endpoints")
+//springbootapplication also includes default componentscan, might need to filter this later currently blocks security filter if enabled
+//@ComponentScan(basePackages = "be.rmc.timecard.endpoints")
 
 public class Application extends SpringBootServletInitializer implements WebApplicationInitializer {
 

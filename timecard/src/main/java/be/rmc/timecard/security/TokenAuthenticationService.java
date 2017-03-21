@@ -7,6 +7,7 @@ import org.springframework.security.core.Authentication;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.Date;
 
 import static java.util.Collections.emptyList;
@@ -17,12 +18,15 @@ class TokenAuthenticationService {
     static final String TOKEN_PREFIX = "Bearer";
     static final String HEADER_STRING = "Authorization";
 
-    static void addAuthentication(HttpServletResponse res, String username) {
+    static void addAuthentication(HttpServletResponse res, String username) throws IOException {
         String JWT = Jwts.builder()
                 .setSubject(username)
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRATIONTIME))
                 .signWith(SignatureAlgorithm.HS512, SECRET)
                 .compact();
+        //add token to header and body
+        res.setContentType("application/json");
+        res.getWriter().write("{\"token\":\"" + TOKEN_PREFIX + " " + JWT + "\"}");
         res.addHeader(HEADER_STRING, TOKEN_PREFIX + " " + JWT);
     }
 

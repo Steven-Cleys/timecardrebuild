@@ -16,10 +16,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable().authorizeRequests()
                 .antMatchers("/").permitAll()
                 .antMatchers(HttpMethod.POST, "/login").permitAll()
+                //allow access to swagger UI without auth
+                .antMatchers("/swagger/**").permitAll()
+                //required for swagger ui
+                .antMatchers("/api/swagger.json").permitAll()
+                .antMatchers("/api/login").permitAll()
+                //TODO disable for production and testing to enable security
+                //.antMatchers("/api/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 // We filter the api/login requests
-                .addFilterBefore(new JWTLoginFilter("/login", authenticationManager()),
+                .addFilterBefore(new JWTLoginFilter("/api/login", authenticationManager()),
                         UsernamePasswordAuthenticationFilter.class)
                 // And filter other requests to check the presence of JWT in header
                 .addFilterBefore(new JWTAuthenticationFilter(),
