@@ -61,10 +61,4 @@ public class Application extends SpringBootServletInitializer implements WebAppl
 			tcr.save(tc);
 		};
 	}
-
-	//Required for weblogic if you really want to use that
-	@Override
-	public void onStartup(ServletContext servletContext) throws ServletException {
-
-	}
 }
