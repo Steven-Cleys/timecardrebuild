@@ -14,13 +14,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable().authorizeRequests()
-                .antMatchers("/").permitAll()
-                .antMatchers(HttpMethod.POST, "/login").permitAll()
+                //TODO this enables to access spring actuators without auth, disable for production
+                .antMatchers("/*").permitAll()
                 //allow access to swagger UI without auth
                 .antMatchers("/swagger/**").permitAll()
-                //required for swagger ui
+                //required for swagger ui and for clients
                 .antMatchers("/api/swagger.json").permitAll()
-                .antMatchers("/api/login").permitAll()
+                //allow clients to access login api for auth
+                .antMatchers(HttpMethod.POST,"/api/login").permitAll()
                 //TODO disable for production and testing to enable security
                 //.antMatchers("/api/**").permitAll()
                 .anyRequest().authenticated()

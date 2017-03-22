@@ -2,8 +2,11 @@ package be.rmc.timecard.endpoints;
 
 import be.rmc.timecard.entities.Employee;
 import be.rmc.timecard.repositories.EmployeeRespository;
+import be.rmc.timecard.security.AccountCredentials;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 import javax.ws.rs.*;
@@ -50,7 +53,9 @@ public class EmployeeEndpoint {
     @GET
     @ApiOperation(value ="GET all employees")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response listEmployees() {
+    public Response listEmployees(@ApiParam(value = "Auth Token", required = false) @HeaderParam("authorization") String authorization) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        System.out.println("auth.getName() = " + auth.getName());
         return Response.ok().entity(empRepo.findAll()).build();
     }
 }

@@ -30,7 +30,7 @@ Remaking the timecard project:
 DB: postgresql
 FE: Angular + bootstrap ?
 BE: spring boot or spark (springfox)
-jax-RS
+jax-RS   v
 swagger
 log4j
 
@@ -57,3 +57,8 @@ c) WAL
 
 barman: https://www.digitalocean.com/community/tutorials/how-to-back-up-restore-and-migrate-postgresql-databases-with-barman-on-centos-7
 http://www.devsniper.com/base-entity-class-in-jpa/
+
+security:
+https://auth0.com/blog/securing-spring-boot-with-jwts/
+https://www.mkyong.com/spring-security/get-current-logged-in-username-in-spring-security/
+http://www.baeldung.com/get-user-in-spring-security

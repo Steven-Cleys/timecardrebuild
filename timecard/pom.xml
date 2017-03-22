@@ -79,10 +79,10 @@
 			<artifactId>spring-boot-starter-actuator</artifactId>
 			<version>1.5.2.RELEASE</version>
 		</dependency>
-		<dependency>
+<!--		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-java8</artifactId>
-		</dependency>
+		</dependency>-->
 		<!-- java 8 datatypes for jackson rs-->
 		<dependency>
 			<groupId>com.fasterxml.jackson.datatype</groupId>
