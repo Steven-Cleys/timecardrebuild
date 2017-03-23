@@ -21,3 +21,6 @@ nbbuild/
 dist/
 nbdist/
 .nb-gradle/
+src/\.DS_Store
+
+\.DS_Store
