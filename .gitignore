@@ -1,4 +1,6 @@
+# Maven
 target/
+# Avoid ignoring Maven wrapper jar file (.jar files are usually ignored)
 !.mvn/wrapper/maven-wrapper.jar
 
 ### STS ###
@@ -14,6 +16,11 @@ target/
 *.iml
 *.ipr
 
+# Eclipse
+.classpath
+.project
+.settings/
+
 ### NetBeans ###
 nbproject/private/
 build/
@@ -21,6 +28,7 @@ nbbuild/
 dist/
 nbdist/
 .nb-gradle/
-src/\.DS_Store
 
-\.DS_Store
+
+#Mac
+.DS_Store
