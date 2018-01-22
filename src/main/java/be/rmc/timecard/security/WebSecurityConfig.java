@@ -23,7 +23,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 //allow clients to access login api for auth
                 .antMatchers(HttpMethod.POST,"/api/login").permitAll()
                 //TODO disable for production and testing to enable security
-                //.antMatchers("/api/**").permitAll()
+                .antMatchers("/api/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 // We filter the api/login requests
@@ -39,7 +39,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         // Create a default account
         auth.inMemoryAuthentication()
                 .withUser("admin")
-                .password("password")
+                .password("admin")
                 .roles("ADMIN");
     }
 }
